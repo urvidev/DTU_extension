@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - DTU Extension & Outreach</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="./admin.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Login Screen (shown by default) -->
+            <div id="loginScreen" class="col-md-4 mx-auto mt-5 p-4 login-container">
+                <div class="text-center mb-4">
+                    <h2>Admin Dashboard</h2>
+                    <p>DTU Extension & Outreach</p>
+                </div>
+                <div class="login-form">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" placeholder="Enter username">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Enter password">
+                    </div>
+                    <div class="d-grid">
+                        <button id="loginBtn" class="btn btn-primary">Login</button>
+                    </div>
+                    <div id="loginError" class="text-danger mt-3 text-center" style="display: none;">
+                        Invalid username or password
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard (hidden by default) -->
+            <div id="dashboardScreen" class="col-12" style="display: none;">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="#">DTU Extension Admin</a>
+                        <button id="logoutBtn" class="btn btn-outline-light">Logout</button>
+                    </div>
+                </nav>
+                
+                <div class="container mt-4">
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <h2>Form Submissions</h2>
+                            <p>View and manage submissions from the website</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <ul class="nav nav-tabs" id="submissionTabs" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="schools-tab" data-bs-toggle="tab" data-bs-target="#schools" type="button" role="tab" aria-controls="schools" aria-selected="true">Schools</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="mentors-tab" data-bs-toggle="tab" data-bs-target="#mentors" type="button" role="tab" aria-controls="mentors" aria-selected="false">Mentors</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="ngos-tab" data-bs-toggle="tab" data-bs-target="#ngos" type="button" role="tab" aria-controls="ngos" aria-selected="false">NGOs</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="contacts-tab" data-bs-toggle="tab" data-bs-target="#contacts" type="button" role="tab" aria-controls="contacts" aria-selected="false">Contact Form</button>
+                                </li>
+                            </ul>
+                            
+                            <div class="tab-content mt-3" id="submissionContent">
+                                <div class="tab-pane fade show active" id="schools" role="tabpanel" aria-labelledby="schools-tab">
+                                    <div class="row mb-3">
+                                        <div class="col-12">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <h5>School Submissions</h5>
+                                                <button id="refreshSchoolsBtn" class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-sync-alt"></i> Refresh
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>School Name</th>
+                                                    <th>Contact Person</th>
+                                                    <th>Email</th>
+                                                    <th>Phone</th>
+                                                    <th>Date Submitted</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="schoolsTableBody">
+                                                <tr>
+                                                    <td colspan="6" class="text-center">Loading data...</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                
+                                <div class="tab-pane fade" id="mentors" role="tabpanel" aria-labelledby="mentors-tab">
+                                    <div class="row mb-3">
+                                        <div class="col-12">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <h5>Mentor Submissions</h5>
+                                                <button id="refreshMentorsBtn" class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-sync-alt"></i> Refresh
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Email</th>
+                                                    <th>Phone</th>
+                                                    <th>Expertise</th>
+                                                    <th>Date Submitted</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="mentorsTableBody">
+                                                <tr>
+                                                    <td colspan="6" class="text-center">Loading data...</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                
+                                <div class="tab-pane fade" id="ngos" role="tabpanel" aria-labelledby="ngos-tab">
+                                    <div class="row mb-3">
+                                        <div class="col-12">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <h5>NGO Submissions</h5>
+                                                <button id="refreshNgosBtn" class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-sync-alt"></i> Refresh
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Organization Name</th>
+                                                    <th>Contact Person</th>
+                                                    <th>Email</th>
+                                                    <th>Focus Areas</th>
+                                                    <th>Date Submitted</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="ngosTableBody">
+                                                <tr>
+                                                    <td colspan="6" class="text-center">Loading data...</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                
+                                <div class="tab-pane fade" id="contacts" role="tabpanel" aria-labelledby="contacts-tab">
+                                    <div class="row mb-3">
+                                        <div class="col-12">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <h5>Contact Form Submissions</h5>
+                                                <button id="refreshContactsBtn" class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-sync-alt"></i> Refresh
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-striped table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Email</th>
+                                                    <th>Subject</th>
+                                                    <th>Message</th>
+                                                    <th>Date Submitted</th>
+                                                    <th>Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="contactsTableBody">
+                                                <tr>
+                                                    <td colspan="6" class="text-center">Loading data...</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Details Modal -->
+    <div class="modal fade" id="viewDetailsModal" tabindex="-1" aria-labelledby="viewDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="viewDetailsModalLabel">Submission Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="detailsContent">
+                        <!-- Details will be filled dynamically -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Supabase Client Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+      <!-- Supabase Global Initialization -->
+    <script src="../../js/supabase-init.js"></script>
+    
+    <!-- Table Verification -->
+    <script src="../../js/verify-tables.js"></script>
+    
+    <!-- Supabase Helper Functions -->
+    <script src="../../js/supabase-helpers.js"></script>
+    
+    <!-- Custom Admin JS -->
+    <script src="./admin.js"></script>
+</body>
+</html>

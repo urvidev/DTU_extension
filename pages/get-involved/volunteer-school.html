@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteer as a School - DTU Extension & Outreach</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS CSS for scroll animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="./get-involved.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top scrolled">
+        <div class="container">
+            <a class="navbar-brand" href="../../index.html">DTU Extension</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../../index.html#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../../index.html#about">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            Programs
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="../../index.html#programs">Education Initiatives</a></li>
+                            <li><a class="dropdown-item" href="../../index.html#programs">Community Outreach</a></li>
+                            <li><a class="dropdown-item" href="../../index.html#programs">Skill Development</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../../index.html#impact">Impact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../../index.html#testimonials">Testimonials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../../index.html#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h1>Volunteer as a School</h1>
+                    <p class="lead">Partner with us to bring educational programs to your students</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Form Section -->
+    <section class="section-padding">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">                    <div class="form-container">
+                        <div class="form-header text-center">
+                            <h2>School Partnership Form</h2>
+                            <p>Fill out the form below to start the collaboration process with DTU Extension & Outreach</p>
+                        </div>
+                        <form id="schoolForm">
+                            <div class="mb-4">
+                                <label for="schoolName" class="form-label">School Name *</label>
+                                <input type="text" class="form-control" id="schoolName" required>
+                                <div class="invalid-feedback">Please enter your school name</div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="contactName" class="form-label">Contact Person's Name *</label>
+                                <input type="text" class="form-control" id="contactName" required>
+                                <div class="invalid-feedback">Please enter the contact person's name</div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="position" class="form-label">Position at School *</label>
+                                <input type="text" class="form-control" id="position" required>
+                                <div class="invalid-feedback">Please enter your position</div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <label for="email" class="form-label">Email *</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                    <div class="invalid-feedback">Please enter a valid email</div>
+                                </div>
+                                
+                                <div class="col-md-6 mb-4">
+                                    <label for="phone" class="form-label">Phone Number</label>
+                                    <input type="tel" class="form-control" id="phone">
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="schoolAddress" class="form-label">School Address *</label>
+                                <textarea class="form-control" id="schoolAddress" rows="3" required></textarea>
+                                <div class="invalid-feedback">Please enter your school address</div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="studentCount" class="form-label">Approximate Number of Students *</label>
+                                <input type="number" class="form-control" id="studentCount" min="1" required>
+                                <div class="invalid-feedback">Please enter the number of students</div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label class="form-label">Areas of Interest (Check all that apply) *</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="interestWorkshops">
+                                    <label class="form-check-label" for="interestWorkshops">STEM Workshops</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="interestMentorship">
+                                    <label class="form-check-label" for="interestMentorship">Mentorship Programs</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="interestEducation">
+                                    <label class="form-check-label" for="interestEducation">Digital Education</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="interestTeacherTraining">
+                                    <label class="form-check-label" for="interestTeacherTraining">Teacher Training</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="interestInfrastructure">
+                                    <label class="form-check-label" for="interestInfrastructure">Infrastructure Support</label>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="message" class="form-label">Additional Details</label>
+                                <textarea class="form-control" id="message" rows="5" placeholder="Tell us more about your school's needs and how you think DTU can help..."></textarea>
+                            </div>
+                            
+                            <div class="mb-4 form-check">
+                                <input type="checkbox" class="form-check-input" id="acceptTerms" required>
+                                <label class="form-check-label" for="acceptTerms">I agree to be contacted regarding this partnership opportunity *</label>
+                                <div class="invalid-feedback">You must agree before submitting</div>
+                            </div>
+                            
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary btn-lg">Submit Application</button>
+                            </div>
+                                <div class="invalid-feedback">Please enter contact person's name</div>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="position" class="form-label">Position/Designation *</label>
+                                <input type="text" class="form-control" id="position" required>
+                                <div class="invalid-feedback">Please enter your position</div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="email" class="form-label">Email Address *</label>
+                                <input type="email" class="form-control" id="email" required>
+                                <div class="invalid-feedback">Please enter a valid email address</div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="phone" class="form-label">Phone Number *</label>
+                                <input type="tel" class="form-control" id="phone" required>
+                                <div class="invalid-feedback">Please enter your phone number</div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="schoolAddress" class="form-label">School Address</label>
+                                <textarea class="form-control" id="schoolAddress" rows="2"></textarea>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="studentCount" class="form-label">Number of Students</label>
+                                <input type="number" class="form-control" id="studentCount">
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="interests" class="form-label">Areas of Interest (Select all that apply)</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="interest1">
+                                    <label class="form-check-label" for="interest1">Educational Workshops</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="interest2">
+                                    <label class="form-check-label" for="interest2">STEM Programs</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="interest3">
+                                    <label class="form-check-label" for="interest3">Career Guidance</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="interest4">
+                                    <label class="form-check-label" for="interest4">Teacher Training</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="interest5">
+                                    <label class="form-check-label" for="interest5">Technology Integration</label>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <label for="message" class="form-label">Why do you want to collaborate with DTU Extension? *</label>
+                                <textarea class="form-control" id="message" rows="5" required></textarea>
+                                <div class="invalid-feedback">Please tell us why you want to collaborate</div>
+                            </div>
+
+                            <div class="mb-4 form-check">
+                                <input type="checkbox" class="form-check-input" id="agreeTerms" required>
+                                <label class="form-check-label" for="agreeTerms">I agree to be contacted by DTU Extension & Outreach team *</label>
+                                <div class="invalid-feedback">You must agree before submitting</div>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary btn-lg">Submit Application</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Modal -->
+    <div class="modal fade success-modal" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="successModalLabel">Application Submitted</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h4>Thank You!</h4>
+                    <p>Your school partnership application has been successfully submitted. Our team will review your information and contact you soon to discuss the next steps.</p>
+                    <button type="button" class="btn btn-primary mt-3" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="footer-content">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="footer-info">
+                            <h3>DTU Extension</h3>
+                            <p>Empowering communities through education, innovation, and outreach.</p>
+                            <div class="social-links mt-3">
+                                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                                <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-6 mb-4">
+                        <div class="footer-links">
+                            <h4>Quick Links</h4>
+                            <ul>
+                                <li><a href="../../index.html#home">Home</a></li>
+                                <li><a href="../../index.html#about">About Us</a></li>
+                                <li><a href="../../index.html#programs">Programs</a></li>
+                                <li><a href="../../index.html#impact">Impact</a></li>
+                                <li><a href="../../index.html#contact">Contact</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="footer-links">
+                            <h4>Our Programs</h4>
+                            <ul>
+                                <li><a href="../../index.html#programs">Education Initiatives</a></li>
+                                <li><a href="../../index.html#programs">Community Outreach</a></li>
+                                <li><a href="../../index.html#programs">Skill Development</a></li>
+                                <li><a href="index.html">Volunteer Opportunities</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="footer-newsletter">
+                            <h4>Subscribe to Our Newsletter</h4>
+                            <p>Stay updated with our latest news and events</p>
+                            <form action="" method="post">
+                                <input type="email" name="email" placeholder="Your Email" required>
+                                <button type="submit" class="btn-subscribe">Subscribe</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="copyright">
+                        &copy; 2023 <strong>DTU Extension & Outreach</strong>. All Rights Reserved
+                    </div>
+                    <div class="credits">
+                        <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>    <!-- Back to top button -->
+    <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Supabase Client Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>    <!-- Supabase Global Initialization -->
+    <script src="../../js/supabase-init.js"></script>
+    <!-- Table Verification -->
+    <script src="../../js/verify-tables.js"></script>
+    <!-- Custom JS -->
+    <script src="../../js/script.js"></script>
+    <script src="./volunteer-forms.js"></script>
+</body>
+</html>

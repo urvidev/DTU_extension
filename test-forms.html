@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supabase Integration Test - DTU Extension & Outreach</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        .test-section {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            border: 1px solid #dee2e6;
+            border-radius: 0.25rem;
+        }
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            display: inline-block;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        .status-success {
+            background-color: #28a745;
+        }
+        .status-warning {
+            background-color: #ffc107;
+        }
+        .status-error {
+            background-color: #dc3545;
+        }
+        .status-pending {
+            background-color: #6c757d;
+        }
+        pre {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-radius: 0.25rem;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .result-block {
+            margin-top: 1rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="../index.html">DTU Extension & Outreach</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../index.html">Back to Home</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="row mb-4">
+            <div class="col-12">
+                <h1>Supabase Integration Test</h1>
+                <p class="lead">This page helps you test all form submissions and database integrations.</p>
+                <div class="alert alert-info">
+                    This is a testing tool for administrators. Use the buttons below to verify your Supabase setup.
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Supabase Connection Status</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="connectionStatus">
+                            <span class="status-indicator status-pending"></span> Checking connection...
+                        </div>
+                        <div id="connectionDetails" class="result-block">
+                            <h6>Connection Details:</h6>
+                            <pre id="connectionDetailsOutput"></pre>
+                        </div>
+                        <button id="checkConnectionBtn" class="btn btn-primary mt-3">Check Connection</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="test-section">
+                    <h4>Test School Form Submission</h4>
+                    <form id="testSchoolForm">
+                        <div class="mb-3">
+                            <label for="schoolName" class="form-label">School Name</label>
+                            <input type="text" class="form-control" id="schoolName" value="Test School">
+                        </div>
+                        <div class="mb-3">
+                            <label for="contactName" class="form-label">Contact Name</label>
+                            <input type="text" class="form-control" id="contactName" value="Test Contact">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="schoolEmail" value="test@example.com">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Test Submit</button>
+                    </form>
+                    <div id="schoolResult" class="result-block">
+                        <h6>Result:</h6>
+                        <pre id="schoolResultOutput"></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="test-section">
+                    <h4>Test Mentor Form Submission</h4>
+                    <form id="testMentorForm">
+                        <div class="mb-3">
+                            <label for="mentorName" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="mentorName" value="Test Mentor">
+                        </div>
+                        <div class="mb-3">
+                            <label for="mentorEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="mentorEmail" value="mentor@example.com">
+                        </div>
+                        <div class="mb-3">
+                            <label for="expertise" class="form-label">Expertise</label>
+                            <input type="text" class="form-control" id="expertise" value='["Technology", "Teaching"]'>
+                            <small class="form-text text-muted">Enter as JSON array</small>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Test Submit</button>
+                    </form>
+                    <div id="mentorResult" class="result-block">
+                        <h6>Result:</h6>
+                        <pre id="mentorResultOutput"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="test-section">
+                    <h4>Test NGO Form Submission</h4>
+                    <form id="testNgoForm">
+                        <div class="mb-3">
+                            <label for="ngoName" class="form-label">NGO Name</label>
+                            <input type="text" class="form-control" id="ngoName" value="Test NGO">
+                        </div>
+                        <div class="mb-3">
+                            <label for="ngoContactName" class="form-label">Contact Name</label>
+                            <input type="text" class="form-control" id="ngoContactName" value="NGO Contact">
+                        </div>
+                        <div class="mb-3">
+                            <label for="ngoEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="ngoEmail" value="ngo@example.com">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Test Submit</button>
+                    </form>
+                    <div id="ngoResult" class="result-block">
+                        <h6>Result:</h6>
+                        <pre id="ngoResultOutput"></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
+                <div class="test-section">
+                    <h4>Test Contact Form Submission</h4>
+                    <form id="testContactForm">
+                        <div class="mb-3">
+                            <label for="contactFormName" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="contactFormName" value="Test Contact">
+                        </div>
+                        <div class="mb-3">
+                            <label for="contactFormEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="contactFormEmail" value="contact@example.com">
+                        </div>
+                        <div class="mb-3">
+                            <label for="contactFormSubject" class="form-label">Subject</label>
+                            <input type="text" class="form-control" id="contactFormSubject" value="Test Subject">
+                        </div>
+                        <div class="mb-3">
+                            <label for="contactFormMessage" class="form-label">Message</label>
+                            <textarea class="form-control" id="contactFormMessage" rows="3">This is a test message.</textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Test Submit</button>
+                    </form>
+                    <div id="contactResult" class="result-block">
+                        <h6>Result:</h6>
+                        <pre id="contactResultOutput"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-5">
+            <div class="col-12">
+                <div class="test-section">
+                    <h4>Verify Database Tables</h4>
+                    <p>Check if all required tables exist in your Supabase project.</p>
+                    <button id="verifyTablesBtn" class="btn btn-primary">Verify Tables</button>
+                    <div id="tablesResult" class="result-block mt-3">
+                        <h6>Tables Status:</h6>
+                        <div id="tablesStatusOutput"></div>
+                        <pre id="tablesResultOutput" class="mt-2"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Supabase Client Library -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- Test Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize Supabase client
+            const SUPABASE_URL = "https://vbliswazkbdlswqgmcmo.supabase.co";
+            const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZibGlzd2F6a2JkbHN3cWdtY21vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg1MjU4NTEsImV4cCI6MjA2NDEwMTg1MX0.lgn6Q2FFeC1JiSJMH2gpMwshg13fJ7ZMoBmMdAngicM";
+            let supabase;
+
+            try {
+                if (typeof window.supabase !== 'undefined') {
+                    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+                    console.log('Supabase client initialized');
+                    updateConnectionStatus('success', 'Connected to Supabase');
+                } else {
+                    console.error('Supabase library not loaded');
+                    updateConnectionStatus('error', 'Supabase library not loaded');
+                }
+            } catch (e) {
+                console.error('Error initializing Supabase client:', e);
+                updateConnectionStatus('error', 'Error initializing Supabase: ' + e.message);
+            }
+
+            // Helper function to update connection status
+            function updateConnectionStatus(status, message) {
+                const connectionStatus = document.getElementById('connectionStatus');
+                const indicator = connectionStatus.querySelector('.status-indicator');
+                
+                indicator.classList.remove('status-pending', 'status-success', 'status-error', 'status-warning');
+                
+                switch(status) {
+                    case 'success':
+                        indicator.classList.add('status-success');
+                        break;
+                    case 'error':
+                        indicator.classList.add('status-error');
+                        break;
+                    case 'warning':
+                        indicator.classList.add('status-warning');
+                        break;
+                    default:
+                        indicator.classList.add('status-pending');
+                }
+                
+                // Update the text
+                connectionStatus.innerHTML = `<span class="status-indicator status-${status}"></span> ${message}`;
+            }
+
+            // Check Connection Button
+            document.getElementById('checkConnectionBtn').addEventListener('click', async function() {
+                updateConnectionStatus('pending', 'Checking connection...');
+                
+                try {
+                    const { data, error } = await supabase.from('school_submissions').select('count(*)').limit(1);
+                    
+                    if (error) {
+                        updateConnectionStatus('error', 'Connection error: ' + error.message);
+                    } else {
+                        updateConnectionStatus('success', 'Connected to Supabase successfully');
+                        
+                        // Display additional connection details
+                        const connectionDetails = document.getElementById('connectionDetails');
+                        const output = document.getElementById('connectionDetailsOutput');
+                        
+                        connectionDetails.style.display = 'block';
+                        
+                        // Get project details
+                        const projectDetails = {
+                            url: SUPABASE_URL,
+                            apiKeyLength: SUPABASE_KEY.length,
+                            timestamp: new Date().toISOString()
+                        };
+                        
+                        output.textContent = JSON.stringify(projectDetails, null, 2);
+                    }
+                } catch (e) {
+                    updateConnectionStatus('error', 'Error checking connection: ' + e.message);
+                }
+            });
+
+            // Verify Tables Button
+            document.getElementById('verifyTablesBtn').addEventListener('click', async function() {
+                const tablesResult = document.getElementById('tablesResult');
+                const tablesStatusOutput = document.getElementById('tablesStatusOutput');
+                const tablesResultOutput = document.getElementById('tablesResultOutput');
+                
+                tablesResult.style.display = 'block';
+                tablesStatusOutput.innerHTML = '<div class="spinner-border spinner-border-sm text-primary" role="status"><span class="visually-hidden">Loading...</span></div> Verifying tables...';
+                
+                try {
+                    const requiredTables = [
+                        'school_submissions',
+                        'mentor_submissions',
+                        'ngo_submissions',
+                        'contact_submissions'
+                    ];
+                    
+                    const results = {};
+                    let html = '<ul class="list-group">';
+                    
+                    for (const table of requiredTables) {
+                        try {
+                            const { data, error } = await supabase
+                                .from(table)
+                                .select('count(*)');
+                            
+                            if (error) {
+                                results[table] = { exists: false, error: error.message };
+                                html += `<li class="list-group-item d-flex justify-content-between align-items-center">
+                                    ${table}
+                                    <span class="badge bg-danger rounded-pill">Missing</span>
+                                </li>`;
+                            } else {
+                                results[table] = { exists: true, count: data[0]?.count || 0 };
+                                html += `<li class="list-group-item d-flex justify-content-between align-items-center">
+                                    ${table}
+                                    <span class="badge bg-success rounded-pill">${data[0]?.count || 0} records</span>
+                                </li>`;
+                            }
+                        } catch (err) {
+                            results[table] = { exists: false, error: err.message };
+                            html += `<li class="list-group-item d-flex justify-content-between align-items-center">
+                                ${table}
+                                <span class="badge bg-danger rounded-pill">Error</span>
+                            </li>`;
+                        }
+                    }
+                    
+                    html += '</ul>';
+                    tablesStatusOutput.innerHTML = html;
+                    tablesResultOutput.textContent = JSON.stringify(results, null, 2);
+                    
+                    const allTablesExist = Object.values(results).every(r => r.exists);
+                    
+                    if (allTablesExist) {
+                        tablesStatusOutput.innerHTML = '<div class="alert alert-success">All required tables exist!</div>' + html;
+                    } else {
+                        tablesStatusOutput.innerHTML = '<div class="alert alert-danger">Some tables are missing. Please create them as described in SUPABASE_SETUP.md</div>' + html;
+                    }
+                } catch (e) {
+                    tablesStatusOutput.innerHTML = `<div class="alert alert-danger">Error: ${e.message}</div>`;
+                    tablesResultOutput.textContent = JSON.stringify({ error: e.message }, null, 2);
+                }
+            });
+
+            // Test School Form
+            document.getElementById('testSchoolForm').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                const resultBlock = document.getElementById('schoolResult');
+                const output = document.getElementById('schoolResultOutput');
+                
+                resultBlock.style.display = 'block';
+                output.textContent = 'Submitting...';
+                
+                try {
+                    const formData = {
+                        schoolName: document.getElementById('schoolName').value,
+                        contactName: document.getElementById('contactName').value,
+                        email: document.getElementById('schoolEmail').value,
+                        position: 'Test Position',
+                        phone: '123-456-7890',
+                        schoolAddress: 'Test Address',
+                        studentCount: 100,
+                        interests: ['STEM', 'Arts'],
+                        message: 'This is a test submission from the testing page.',
+                        created_at: new Date().toISOString()
+                    };
+                    
+                    const { data, error } = await supabase
+                        .from('school_submissions')
+                        .insert([formData]);
+                    
+                    if (error) {
+                        output.textContent = JSON.stringify({ status: 'error', error: error.message }, null, 2);
+                    } else {
+                        output.textContent = JSON.stringify({ status: 'success', data: formData }, null, 2);
+                    }
+                } catch (e) {
+                    output.textContent = JSON.stringify({ status: 'error', message: e.message }, null, 2);
+                }
+            });
+
+            // Test Mentor Form
+            document.getElementById('testMentorForm').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                const resultBlock = document.getElementById('mentorResult');
+                const output = document.getElementById('mentorResultOutput');
+                
+                resultBlock.style.display = 'block';
+                output.textContent = 'Submitting...';
+                
+                try {
+                    const expertise = document.getElementById('expertise').value;
+                    let expertiseArray;
+                    
+                    try {
+                        expertiseArray = JSON.parse(expertise);
+                    } catch (e) {
+                        expertiseArray = [expertise];
+                    }
+                    
+                    const formData = {
+                        name: document.getElementById('mentorName').value,
+                        email: document.getElementById('mentorEmail').value,
+                        phone: '123-456-7890',
+                        organization: 'Test Organization',
+                        designation: 'Test Designation',
+                        expertise: expertiseArray,
+                        otherExpertise: 'Test Other Expertise',
+                        experience: 'Test Experience',
+                        availability: 'Weekends',
+                        message: 'This is a test submission from the testing page.',
+                        created_at: new Date().toISOString()
+                    };
+                    
+                    const { data, error } = await supabase
+                        .from('mentor_submissions')
+                        .insert([formData]);
+                    
+                    if (error) {
+                        output.textContent = JSON.stringify({ status: 'error', error: error.message }, null, 2);
+                    } else {
+                        output.textContent = JSON.stringify({ status: 'success', data: formData }, null, 2);
+                    }
+                } catch (e) {
+                    output.textContent = JSON.stringify({ status: 'error', message: e.message }, null, 2);
+                }
+            });
+
+            // Test NGO Form
+            document.getElementById('testNgoForm').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                const resultBlock = document.getElementById('ngoResult');
+                const output = document.getElementById('ngoResultOutput');
+                
+                resultBlock.style.display = 'block';
+                output.textContent = 'Submitting...';
+                
+                try {
+                    const formData = {
+                        ngoName: document.getElementById('ngoName').value,
+                        contactName: document.getElementById('ngoContactName').value,
+                        email: document.getElementById('ngoEmail').value,
+                        phone: '123-456-7890',
+                        website: 'https://example.org',
+                        designation: 'Test Designation',
+                        address: 'Test Address',
+                        establishedYear: 2010,
+                        focusAreas: ['Education', 'Health'],
+                        otherFocus: '',
+                        message: 'This is a test submission from the testing page.',
+                        previousWork: 'Test Previous Work',
+                        created_at: new Date().toISOString()
+                    };
+                    
+                    const { data, error } = await supabase
+                        .from('ngo_submissions')
+                        .insert([formData]);
+                    
+                    if (error) {
+                        output.textContent = JSON.stringify({ status: 'error', error: error.message }, null, 2);
+                    } else {
+                        output.textContent = JSON.stringify({ status: 'success', data: formData }, null, 2);
+                    }
+                } catch (e) {
+                    output.textContent = JSON.stringify({ status: 'error', message: e.message }, null, 2);
+                }
+            });
+
+            // Test Contact Form
+            document.getElementById('testContactForm').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                const resultBlock = document.getElementById('contactResult');
+                const output = document.getElementById('contactResultOutput');
+                
+                resultBlock.style.display = 'block';
+                output.textContent = 'Submitting...';
+                
+                try {
+                    const formData = {
+                        name: document.getElementById('contactFormName').value,
+                        email: document.getElementById('contactFormEmail').value,
+                        subject: document.getElementById('contactFormSubject').value,
+                        message: document.getElementById('contactFormMessage').value,
+                        created_at: new Date().toISOString()
+                    };
+                    
+                    const { data, error } = await supabase
+                        .from('contact_submissions')
+                        .insert([formData]);
+                    
+                    if (error) {
+                        output.textContent = JSON.stringify({ status: 'error', error: error.message }, null, 2);
+                    } else {
+                        output.textContent = JSON.stringify({ status: 'success', data: formData }, null, 2);
+                    }
+                } catch (e) {
+                    output.textContent = JSON.stringify({ status: 'error', message: e.message }, null, 2);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
